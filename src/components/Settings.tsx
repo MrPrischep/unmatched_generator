@@ -36,7 +36,7 @@ const Settings = ({ onBack }: { onBack: () => void }) => {
 
   return (
     <Box display="flex" flexDirection="column" height="100vh">
-      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start" p={3}>
+      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start">
         <Typography variant="h4" gutterBottom>
           Set your boxes
         </Typography>
@@ -56,7 +56,7 @@ const Settings = ({ onBack }: { onBack: () => void }) => {
         <Box 
           display="flex"
           flexDirection="column"
-          maxHeight="400px"
+          maxHeight="430px"
           sx={{
             overflowY: "auto",
             "&::-webkit-scrollbar": {

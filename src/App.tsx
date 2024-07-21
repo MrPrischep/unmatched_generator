@@ -41,7 +41,7 @@ const App = () => {
           component="img"
           src={Logo}
           alt="Logo"
-          sx={{ width: "90%", mt: 8 }}
+          sx={{ width: "90%" }}
         />
         {!mode && <div style={{ 
           width: "100%",

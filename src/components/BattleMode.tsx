@@ -181,13 +181,13 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
 
   return (
     <Box display="flex" flexDirection="column" height="100vh" maxWidth="100%">
-      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start" p={3}>
+      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start">
         <Typography variant="h3" gutterBottom>
           Battle Mode Setup
         </Typography>
         {step === 1 && (
           <Box display="flex" flexDirection="column">
-            <FormControl component="fieldset" sx={{ mb: 2 }}>
+            <FormControl component="fieldset" sx={{ mb: 1 }}>
               <FormLabel component="legend">Game Mode</FormLabel>
               <RadioGroup
                 value={isTeamMode ? "team" : "deathmatch"}
@@ -198,7 +198,7 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
               </RadioGroup>
             </FormControl>
 
-            <FormControl sx={{ mb: 2 }}>
+            <FormControl sx={{ mb: 1 }}>
               <FormLabel>Number of Players</FormLabel>
               <RadioGroup
                 value={numPlayers}
@@ -221,10 +221,10 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
 
         {step === 2 && (
           <Box display="flex" flexDirection="column" justifyContent="flex-start">
-            <FormLabel sx={{ mb: 2 }}>Enter Player Names</FormLabel>
+            <FormLabel sx={{ mb: 1 }}>Enter Player Names</FormLabel>
 
             {Array.from({ length: numPlayers }).map((_, index) => (
-              <Box key={index} sx={{ mb: 2, width: "300px", height: "80px" }}>
+              <Box key={index} sx={{ mb: 1, width: "300px", height: "80px" }}>
                 <TextField
                   key={index}
                   label={`Player ${index + 1} Name`}
@@ -233,7 +233,7 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
                   value={playerNames[index]}
                   onChange={(e) => handlePlayerNameChange(index, e.target.value)}
                   sx={{ 
-                    mb: 2, 
+                    mb: 1, 
                     "& .MuiInputLabel-root": { fontSize: "1.2rem" }, 
                     "& .MuiInputBase-root": { fontSize: "1.2rem" },
                   }}
