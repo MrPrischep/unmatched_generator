@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { Button, Box, IconButton } from "@mui/material"
 import Logo from "./images/Unmatched-logo.png"
 import MenuImg from "./images/menu1.jpg"
@@ -10,7 +10,9 @@ import SettingsIcon from "@mui/icons-material/Settings"
 const App = () => {
   const [mode, setMode] = useState<string>(() => {
     return localStorage.getItem("mode") || ""
-  })  
+  })
+
+  const [hasSelectedBoxes, setHasSelectedBoxes] = useState<boolean>(false)
 
   const handleModeChange = useCallback((newMode: string) => {
     setMode(newMode)
@@ -24,6 +26,11 @@ const App = () => {
   const handleBack = () => {
     handleModeChange("")
   }
+
+  useEffect(() => {
+    const selectedBoxes = JSON.parse(localStorage.getItem("selectedBoxes") || "[]");
+    setHasSelectedBoxes(selectedBoxes.length > 0)
+  }, [mode])
 
   return (
     <Box display="flex" height="100vh">
@@ -43,7 +50,7 @@ const App = () => {
           alt="Logo"
           sx={{ width: "90%" }}
         />
-        {!mode && <div style={{ 
+        {hasSelectedBoxes && !mode && <div style={{ 
           width: "100%",
           display: "flex",
           justifyContent: "end",
@@ -88,7 +95,7 @@ const App = () => {
             >
               Tournament Mode
             </Button> */}
-            <Button
+            {hasSelectedBoxes && <Button
               variant="contained"
               color="secondary"
               onClick={() => handleModeChange("battle")}
@@ -106,7 +113,26 @@ const App = () => {
               }}
             >
               Battle Mode
-            </Button>
+            </Button>}
+            {!hasSelectedBoxes && <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleModeChange("settings")}
+              sx={{
+                mb: 5,
+                width: "400px",
+                height: "100px",
+                borderRadius: "10px",
+                fontSize: "1.8rem",
+                ":hover": {
+                  backgroundColor: "primary.dark",
+                },
+                boxShadow: 3,
+                transition: "all 0.3s ease",
+              }}
+            >
+              First set your boxes
+            </Button>}
           </Box>
         )}
         {mode === "battle" && <BattleMode onBack={ handleBack } />}
