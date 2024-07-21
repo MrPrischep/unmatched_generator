@@ -20,7 +20,7 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://MrPrischep.github.io/unmatchedGenerator",
+  "homepage": "https://mrprischep.github.io/unmatchedGenerator",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
