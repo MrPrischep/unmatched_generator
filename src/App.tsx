@@ -5,6 +5,7 @@ import MenuImg from "./images/menu1.jpg"
 import BattleMode from "./components/BattleMode"
 import Settings from "./components/Settings"
 import SettingsIcon from "@mui/icons-material/Settings"
+import packageJson from "../package.json";
 // import TournamentMode from "./components/TournamentMode"
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
     return localStorage.getItem("mode") || ""
   })
 
+  const currentVersion = packageJson.version
   const [hasSelectedBoxes, setHasSelectedBoxes] = useState<boolean>(false)
 
   const handleModeChange = useCallback((newMode: string) => {
@@ -26,6 +28,15 @@ const App = () => {
   const handleBack = () => {
     handleModeChange("")
   }
+
+  useEffect(() => {
+    const savedVersion = localStorage.getItem("appVersion")
+
+    if (!savedVersion || savedVersion !== currentVersion) {
+      localStorage.clear()
+      localStorage.setItem("appVersion", currentVersion)
+    }
+  }, [currentVersion])
 
   useEffect(() => {
     const selectedBoxes = JSON.parse(localStorage.getItem("selectedBoxes") || "[]");

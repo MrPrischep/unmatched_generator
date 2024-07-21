@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "postbump": "git add package.json"
+  }
+}
