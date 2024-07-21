@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/unmatchedGenerator/static/css/main.e6c13ad2.css",
-    "main.js": "/unmatchedGenerator/static/js/main.39af3c72.js",
-    "static/media/menu1.jpg": "/unmatchedGenerator/static/media/menu1.4b2cda344383f509dcdb.jpg",
-    "static/media/Unmatched-logo.png": "/unmatchedGenerator/static/media/Unmatched-logo.50992bb312ad4ae4c217.png",
-    "index.html": "/unmatchedGenerator/index.html",
-    "main.e6c13ad2.css.map": "/unmatchedGenerator/static/css/main.e6c13ad2.css.map",
-    "main.39af3c72.js.map": "/unmatchedGenerator/static/js/main.39af3c72.js.map"
+    "main.css": "/unmatchhedGenerator/static/css/main.e6c13ad2.css",
+    "main.js": "/unmatchhedGenerator/static/js/main.3eeddb84.js",
+    "static/media/menu1.jpg": "/unmatchhedGenerator/static/media/menu1.4b2cda344383f509dcdb.jpg",
+    "static/media/Unmatched-logo.png": "/unmatchhedGenerator/static/media/Unmatched-logo.50992bb312ad4ae4c217.png",
+    "index.html": "/unmatchhedGenerator/index.html",
+    "main.e6c13ad2.css.map": "/unmatchhedGenerator/static/css/main.e6c13ad2.css.map",
+    "main.3eeddb84.js.map": "/unmatchhedGenerator/static/js/main.3eeddb84.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.39af3c72.js"
+    "static/js/main.3eeddb84.js"
   ]
 }
