@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Box, Button, Typography, TextField, RadioGroup, FormControlLabel, Radio, Checkbox, FormControl, FormLabel } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import useSelectedCharacters from "../hooks/useSelectedCharacters"
 import useSelectedMaps from "../hooks/useSelectedMaps"
+import RefreshIcon from "@mui/icons-material/Refresh"
 
 interface GameData {
   teams: { teamName: string; members: { name: string; character: string }[] }[]
@@ -80,7 +81,7 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
     setNameErrors(updatedErrors)
   }
 
-  const handleGenerate = () => {
+  const handleGenerate = useCallback(() => {
     const shuffledNames = shuffleArray([...playerNames])
     const shuffledMaps = shuffleArray([...maps])
     const shuffledCharacters = shuffleArray([...characters])
@@ -106,7 +107,7 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
 
     setGameData(data)
     setStep(3)
-  }
+  }, [playerNames, maps, characters, numPlayers, isTeamMode, randomField])
 
   const handleNext = () => {
     if (step === 1) {
@@ -180,8 +181,8 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
   const hasDuplicates = findDuplicateIndices(playerNames).length > 0
 
   return (
-    <Box display="flex" flexDirection="column" height="100vh" maxWidth="100%">
-      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start">
+    <Box display="flex" flexDirection="column" height="100vh" width="100%" padding="0px 10px">
+      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start" >
         <Typography variant="h3" gutterBottom>
           Battle Mode Setup
         </Typography>
@@ -288,22 +289,42 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
           </Button>
         )}
         {step === 3 && (
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              setStep(1)
-              localStorage.removeItem("battleModeState")
-              onBack()
-            }}
-            sx={{
-              width: "200px",
-              height: "60px",
-              fontSize: "1.5rem",
-            }}
-          >
-            Finish
-          </Button>
+          <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleGenerate}
+              sx={{
+                width: "60px",
+                height: "60px",
+                fontSize: "1.5rem",
+                backgroundColor: "white",
+                color: "primary.main",
+                ":hover": {
+                  backgroundColor: "primary.main",
+                  color: "white",
+                }
+              }}
+            >
+              <RefreshIcon />
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                setStep(1)
+                localStorage.removeItem("battleModeState")
+                onBack()
+              }}
+              sx={{
+                width: "200px",
+                height: "60px",
+                fontSize: "1.5rem",
+              }}
+            >
+              Finish
+            </Button>
+          </Box>
         )}
       </Box>
     </Box>
