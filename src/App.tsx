@@ -1,12 +1,20 @@
 import { useState, useCallback, useEffect } from "react"
-import { Button, Box, IconButton } from "@mui/material"
+import { Button, Box, IconButton, Typography } from "@mui/material"
 import Logo from "./images/Unmatched-logo.png"
 import MenuImg from "./images/menu1.jpg"
 import BattleMode from "./components/BattleMode"
 import Settings from "./components/Settings"
 import SettingsIcon from "@mui/icons-material/Settings"
 import packageJson from "../package.json";
-// import TournamentMode from "./components/TournamentMode"
+import TournamentMode from "./components/TournamentMode"
+import VisualBracket from "./components/VisualBracket"
+
+interface BracketPair {
+  player1: string
+  character1?: string
+  player2: string
+  character2?: string
+}
 
 const App = () => {
   const [mode, setMode] = useState<string>(() => {
@@ -15,6 +23,7 @@ const App = () => {
 
   const currentVersion = packageJson.version
   const [hasSelectedBoxes, setHasSelectedBoxes] = useState<boolean>(false)
+  const [bracket, setBracket] = useState<{ pairs: BracketPair[], luckyPlayer?: string } | null>(null)
 
   const handleModeChange = useCallback((newMode: string) => {
     setMode(newMode)
@@ -27,6 +36,10 @@ const App = () => {
 
   const handleBack = () => {
     handleModeChange("")
+  }
+
+  const handleBracketGenerated = (newBracket: { pairs: BracketPair[], luckyPlayer?: string }) => {
+    setBracket(newBracket)
   }
 
   useEffect(() => {
@@ -42,6 +55,8 @@ const App = () => {
     const selectedBoxes = JSON.parse(localStorage.getItem("selectedBoxes") || "[]");
     setHasSelectedBoxes(selectedBoxes.length > 0)
   }, [mode])
+
+  console.log("bracket = ", bracket)
 
   return (
     <Box display="flex" height="100vh">
@@ -89,10 +104,10 @@ const App = () => {
             justifyContent="center"
             flexGrow={1}
           >
-            {/* <Button
+            {hasSelectedBoxes && <Button
               variant="contained"
               color="primary"
-              onClick={() => setMode("tournament")}
+              onClick={() => handleModeChange("tournament")}
               sx={{
                 mb: 5,
                 width: "400px",
@@ -102,10 +117,12 @@ const App = () => {
                 ":hover": {
                   backgroundColor: "primary.dark",
                 },
+                boxShadow: 3,
+                transition: "all 0.3s ease",
               }}
             >
               Tournament Mode
-            </Button> */}
+            </Button>}
             {hasSelectedBoxes && <Button
               variant="contained"
               color="secondary"
@@ -148,16 +165,26 @@ const App = () => {
         )}
         {mode === "battle" && <BattleMode onBack={ handleBack } />}
         {mode === "settings" && <Settings onBack={ handleBack } />}
-        {/* {mode === "tournament" && <TournamentMode />} */}
+        {mode === "tournament" && <TournamentMode onBack={ handleBack } onBracketGenerated={handleBracketGenerated} />}
       </Box>
-      <Box
-        flex={2}
-        sx={{
-          background: `url(${MenuImg}) no-repeat center center`,
-          backgroundSize: "cover",
-        }}
-      >
-      </Box>
+      {mode === "tournament" && bracket && (
+        <Box
+          flex={2}
+          display="flex"
+          justifyContent="center"
+        >
+          <VisualBracket/>
+        </Box>
+      )}
+      {(!mode || !bracket) && (
+        <Box
+          flex={2}
+          sx={{
+            background: `url(${MenuImg}) no-repeat center center`,
+            backgroundSize: "cover",
+          }}
+        />
+      )}
     </Box>
   )
 }

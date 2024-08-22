@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Box, Button, Typography, TextField, RadioGroup, FormControlLabel, Radio, Checkbox, FormControl, FormLabel } from "@mui/material"
+import { Box, Button, Typography, TextField, RadioGroup, FormControlLabel, Radio, Checkbox, FormControl, FormLabel, Select, MenuItem } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import useSelectedCharacters from "../hooks/useSelectedCharacters"
 import useSelectedMaps from "../hooks/useSelectedMaps"
@@ -189,13 +189,13 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
           <Box display="flex" flexDirection="column">
             <FormControl component="fieldset" sx={{ mb: 1 }}>
               <FormLabel component="legend">Game Mode</FormLabel>
-              <RadioGroup
+              <Select
                 value={isTeamMode ? "team" : "deathmatch"}
                 onChange={(e) => setIsTeamMode(e.target.value === "team")}
               >
-                <FormControlLabel value="deathmatch" control={<Radio />} label={<Typography variant="h5">Deathmatch</Typography>} />
-                <FormControlLabel value="team" control={<Radio />} label={<Typography variant="h5">Team Mode</Typography>} />
-              </RadioGroup>
+                <MenuItem value="deathmatch">Deathmatch</MenuItem>
+                <MenuItem value="team">Team Mode</MenuItem>
+              </Select>
             </FormControl>
 
             <FormControl sx={{ mb: 1 }}>
@@ -224,7 +224,7 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
             <FormLabel sx={{ mb: 1 }}>Enter Player Names</FormLabel>
 
             {Array.from({ length: numPlayers }).map((_, index) => (
-              <Box key={index} sx={{ mb: 1, width: "300px", height: "80px" }}>
+              <Box key={index} sx={{ mb: 1, height: "80px" }}>
                 <TextField
                   key={index}
                   label={`Player ${index + 1} Name`}
@@ -233,7 +233,8 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
                   value={playerNames[index]}
                   onChange={(e) => handlePlayerNameChange(index, e.target.value)}
                   sx={{ 
-                    mb: 1, 
+                    mb: 1,
+                    width: "100%",
                     "& .MuiInputLabel-root": { fontSize: "1.2rem" }, 
                     "& .MuiInputBase-root": { fontSize: "1.2rem" },
                   }}
