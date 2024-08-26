@@ -181,9 +181,9 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
   const hasDuplicates = findDuplicateIndices(playerNames).length > 0
 
   return (
-    <Box display="flex" flexDirection="column" height="100vh" width="100%" padding="0px 10px">
-      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start" >
-        <Typography variant="h3" gutterBottom>
+    <Box display="flex" flexDirection="column" height="100vh" width="100%" justifyContent="center" alignItems="center">
+      <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-start" width="90%">
+        <Typography variant="h3" gutterBottom display="flex" justifyContent="flex-start">
           Battle Mode Setup
         </Typography>
         {step === 1 && (
@@ -225,7 +225,7 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
             <FormLabel sx={{ mb: 1 }}>Enter Player Names</FormLabel>
 
             {Array.from({ length: numPlayers }).map((_, index) => (
-              <Box key={index} sx={{ mb: 1, width: "300px", height: "80px" }}>
+              <Box key={index} sx={{ mb: 1, height: "80px" }}>
                 <TextField
                   key={index}
                   label={`Player ${index + 1} Name`}
@@ -234,7 +234,7 @@ const BattleMode = ({ onBack }: { onBack: () => void }) => {
                   value={playerNames[index]}
                   onChange={(e) => handlePlayerNameChange(index, e.target.value)}
                   sx={{ 
-                    mb: 1, 
+                    mb: 1,
                     "& .MuiInputLabel-root": { fontSize: "1.2rem" }, 
                     "& .MuiInputBase-root": { fontSize: "1.2rem" },
                   }}

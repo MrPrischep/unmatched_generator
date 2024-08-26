@@ -60,7 +60,7 @@ const App = () => {
         <Box
           
           sx={{ 
-            width: "30%",
+            width: "35%",
             height: "100vh",
             minWidth: "300px",
             maxWidth: "1000px",
@@ -132,8 +132,9 @@ const App = () => {
                 sx={{
                   mb: 5,
                   p: 4,
+                  minWidth: "230px",
                   borderRadius: "10px",
-                  fontSize: "1.8rem",
+                  fontSize: "1.7rem",
                   ":hover": {
                     backgroundColor: "secondary.dark",
                   },
